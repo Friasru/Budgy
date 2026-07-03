@@ -23,8 +23,6 @@ export default function Dashboard() {
         <h1>Overview</h1>
       </div>
 
-      <img src="/logo.png" alt="Budgy Logo" className="logo-image" />
-
       <div className="balance-card">
         <p className="balance-label">Total Balance</p>
         <h2 className="balance-amount">
@@ -49,9 +47,7 @@ export default function Dashboard() {
       <div className="card">
         <div className="card-header-row">
           <h3>Task Progress</h3>
-          <span className="muted">
-            {completedTasksCount}/{tasks.length} done
-          </span>
+          <span className="muted">{completedTasksCount}/{tasks.length} done</span>
         </div>
         <div className="progress-track">
           <div className="progress-fill" style={{ width: `${taskProgressPercent}%` }} />
