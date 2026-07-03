@@ -61,13 +61,13 @@ body {
 .app-content {
   flex: 1;
   overflow: hidden;
-  padding: 24px 20px 8px;
+  padding: 12px 10px 4px;
 }
 
 .screen {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .eyebrow {
@@ -86,7 +86,7 @@ h1 {
 
 h3 {
   color: var(--text-main);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   margin: 0;
 }
@@ -100,7 +100,7 @@ h3 {
 .card {
   background: var(--card-bg);
   border-radius: var(--radius-lg);
-  padding: 16px;
+  padding: 12px;
   box-shadow: 0 2px 12px rgba(20, 20, 43, 0.04);
 }
 
@@ -123,7 +123,7 @@ h3 {
 .balance-card {
   background: linear-gradient(135deg, #8b7cf0 0%, #6c5dd3 55%, #5a4bd0 100%);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: 16px;
   color: #fff;
   box-shadow: 0 12px 30px rgba(108, 93, 211, 0.35);
 }
@@ -135,9 +135,9 @@ h3 {
 }
 
 .balance-amount {
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 800;
-  margin: 0 0 22px;
+  margin: 0 0 12px;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
 }
