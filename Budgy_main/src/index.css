@@ -203,31 +203,30 @@ h3 {
 .legend li {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
+  gap: 6px;
+  font-size: 12px;
 }
 
 .legend-name {
   color: var(--text-main);
-  flex: 1;
+  font-size: 12px;
 }
 
 .legend-value {
-  color: var(--text-muted);
-  font-family: 'SF Mono', 'Roboto Mono', monospace;
-  font-size: 13px;
+  font-size: 11px;
+  margin-left: auto;
 }
 
 .dot {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
 }
 
 .dot-large {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
 }
 
