@@ -60,7 +60,7 @@ body {
 
 .app-content {
   flex: 1;
-  overflow-y: auto;
+  overflow: hidden;
   padding: 24px 20px 12px;
 }
 
@@ -737,4 +737,14 @@ h3 {
 
 ::-webkit-scrollbar {
   width: 0;
+}
+
+/* Logo image */
+.logo-image {
+  width: 100px;
+  height: 100px;
+  margin: 10px auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(20, 20, 43, 0.1);
+  object-fit: cover;
 }

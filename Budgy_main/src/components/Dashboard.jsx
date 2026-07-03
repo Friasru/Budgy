@@ -23,6 +23,8 @@ export default function Dashboard() {
         <h1>Overview</h1>
       </div>
 
+      <img src="/logo.png" alt="Budgy Logo" className="logo-image" />
+
       <div className="balance-card">
         <p className="balance-label">Total Balance</p>
         <h2 className="balance-amount">
