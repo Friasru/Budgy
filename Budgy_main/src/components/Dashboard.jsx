@@ -74,11 +74,13 @@ export default function Dashboard() {
             </ul>
           </div>
         </div>
+
+        {/* Title is now static alongside the cards */}
+        <h3 className="section-title">Recent Transactions</h3>
       </div>
 
       {/* ── Scrollable transactions section ── */}
       <div className="dashboard-scroll">
-        <h3 className="section-title">Recent Transactions</h3>
         <div className="transaction-list">
           {recent.map((t) => (
             <div className="transaction-row" key={t.id}>
