@@ -38,6 +38,10 @@ body {
   overflow: hidden;
 }
 
+.app-shell.dark {
+  background: #1a1a2e;
+}
+
 .phone-frame {
   width: 100%;
   max-width: 460px;
