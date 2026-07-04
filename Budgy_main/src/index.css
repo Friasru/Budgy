@@ -32,7 +32,7 @@ body {
 .app-shell {
   display: flex;
   justify-content: center;
-  height: 90vh;
+  height: 100vh;
   background: #d9dbe6;
   padding: 2px 0;
   overflow: hidden;
@@ -41,7 +41,7 @@ body {
 .phone-frame {
   width: 100%;
   max-width: 460px;
-  height: 100%;
+  height: 90%;
   background: var(--bg);
   border-radius: 32px;
   overflow: hidden;
