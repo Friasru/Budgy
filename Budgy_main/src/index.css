@@ -34,7 +34,7 @@ body {
   justify-content: center;
   height: 100vh;
   background: #d9dbe6;
-  padding: 15px 0;
+  padding: 25px 0;
   overflow: hidden;
 }
 
@@ -265,7 +265,7 @@ h3 {
   color: var(--text-main);
   font-size: 15px;
   font-weight: 700;
-  margin: 4px 0 0;
+  margin: 0;
 }
 
 /* Transactions */
@@ -278,7 +278,7 @@ h3 {
 .transaction-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   background: var(--card-bg);
   border-radius: var(--radius-md);
   padding: 8px 16px;
