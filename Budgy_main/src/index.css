@@ -32,9 +32,9 @@ body {
 .app-shell {
   display: flex;
   justify-content: center;
-  height: 90vh;
+  height: 110vh;
   background: #d9dbe6;
-  padding: 2px 0;
+  padding: 4px 0;
   overflow: hidden;
 }
 
@@ -69,7 +69,7 @@ body {
 .screen {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
 /* ── Dashboard: fixed top cards + scrollable transactions ── */
