@@ -115,6 +115,26 @@ body {
   padding-bottom: 8px;
 }
 
+/* ── Tasks: fixed top section + scrollable tasks ── */
+.tasks-screen {
+  height: 100%;
+  overflow: hidden;
+}
+
+.tasks-fixed {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 4px;
+}
+
+.tasks-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 8px;
+}
+
 .eyebrow {
   color: var(--text-muted);
   font-size: 14px;

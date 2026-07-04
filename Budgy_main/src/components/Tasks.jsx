@@ -25,64 +25,70 @@ export default function Tasks() {
   }
 
   return (
-    <div className="screen">
-      <div className="screen-header-row">
-        <div>
-          <p className="eyebrow">
-            {completedCount}/{visibleTasks.length} completed
-          </p>
-          <h1>Tasks</h1>
-        </div>
-        <button className="fab" onClick={() => setShowForm(true)} aria-label="Add task">
-          <Plus size={22} />
-        </button>
-      </div>
-
-      {!isPro && (
-        <div className="upgrade-banner">
-          <Crown size={18} className="crown-icon" />
+    <div className="screen tasks-screen">
+      {/* ── Fixed top section ── */}
+      <div className="tasks-fixed">
+        <div className="screen-header-row">
           <div>
-            <p className="upgrade-title">
-              {tasks.length}/{FREE_TASK_LIMIT} free tasks used
+            <p className="eyebrow">
+              {completedCount}/{visibleTasks.length} completed
             </p>
-            <p className="upgrade-sub">
-              Free plan · <span className="upgrade-link">Upgrade for unlimited</span>
-            </p>
+            <h1>Tasks</h1>
           </div>
-        </div>
-      )}
-
-      <div className="segmented segmented-wide">
-        {['Daily', 'Weekly'].map((f) => (
-          <button
-            key={f}
-            className={`segmented-item ${frequency === f ? 'segmented-item-active' : ''}`}
-            onClick={() => setFrequency(f)}
-          >
-            {f}
+          <button className="fab" onClick={() => setShowForm(true)} aria-label="Add task">
+            <Plus size={22} />
           </button>
-        ))}
-      </div>
+        </div>
 
-      <div className="task-list">
-        {visibleTasks.map((t) => (
-          <div className="task-row" key={t.id}>
-            <button
-              className={`checkbox ${t.done ? 'checkbox-checked' : ''}`}
-              onClick={() => toggleTask(t.id)}
-              aria-label={t.done ? 'Mark incomplete' : 'Mark complete'}
-            >
-              {t.done && <Check size={14} color="#fff" strokeWidth={3} />}
-            </button>
+        {!isPro && (
+          <div className="upgrade-banner">
+            <Crown size={18} className="crown-icon" />
             <div>
-              <p className={`task-title ${t.done ? 'task-title-done' : ''}`}>{t.title}</p>
-              <p className="task-tag">
-                <span className="dot-small" /> {t.tag}
+              <p className="upgrade-title">
+                {tasks.length}/{FREE_TASK_LIMIT} free tasks used
+              </p>
+              <p className="upgrade-sub">
+                Free plan · <span className="upgrade-link">Upgrade for unlimited</span>
               </p>
             </div>
           </div>
-        ))}
-        {visibleTasks.length === 0 && <p className="muted empty-state">No {frequency.toLowerCase()} tasks yet.</p>}
+        )}
+
+        <div className="segmented segmented-wide">
+          {['Daily', 'Weekly'].map((f) => (
+            <button
+              key={f}
+              className={`segmented-item ${frequency === f ? 'segmented-item-active' : ''}`}
+              onClick={() => setFrequency(f)}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Scrollable tasks section ── */}
+      <div className="tasks-scroll">
+        <div className="task-list">
+          {visibleTasks.map((t) => (
+            <div className="task-row" key={t.id}>
+              <button
+                className={`checkbox ${t.done ? 'checkbox-checked' : ''}`}
+                onClick={() => toggleTask(t.id)}
+                aria-label={t.done ? 'Mark incomplete' : 'Mark complete'}
+              >
+                {t.done && <Check size={14} color="#fff" strokeWidth={3} />}
+              </button>
+              <div>
+                <p className={`task-title ${t.done ? 'task-title-done' : ''}`}>{t.title}</p>
+                <p className="task-tag">
+                  <span className="dot-small" /> {t.tag}
+                </p>
+              </div>
+            </div>
+          ))}
+          {visibleTasks.length === 0 && <p className="muted empty-state">No {frequency.toLowerCase()} tasks yet.</p>}
+        </div>
       </div>
 
       {showForm && (
