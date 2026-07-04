@@ -34,13 +34,13 @@ body {
   justify-content: center;
   min-height: 100vh;
   background: #d9dbe6;
-  padding: 12px 0;
+  padding: 12px 0 24px 0;
 }
 
 .phone-frame {
   width: 100%;
   max-width: 460px;
-  height: calc(100vh - 24px);
+  height: calc(100vh - 36px);
   background: var(--bg);
   border-radius: 32px;
   overflow: hidden;
@@ -61,13 +61,13 @@ body {
 .app-content {
   flex: 1;
   overflow: hidden;
-  padding: 16px 16px 8px;
+  padding: 24px 20px 12px;
 }
 
 .screen {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 20px;
 }
 
 .eyebrow {
@@ -100,7 +100,7 @@ h3 {
 .card {
   background: var(--card-bg);
   border-radius: var(--radius-lg);
-  padding: 16px;
+  padding: 20px;
   box-shadow: 0 2px 12px rgba(20, 20, 43, 0.04);
 }
 
@@ -108,7 +108,7 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .muted {
@@ -123,7 +123,7 @@ h3 {
 .balance-card {
   background: linear-gradient(135deg, #8b7cf0 0%, #6c5dd3 55%, #5a4bd0 100%);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: 24px;
   color: #fff;
   box-shadow: 0 12px 30px rgba(108, 93, 211, 0.35);
 }
@@ -135,16 +135,16 @@ h3 {
 }
 
 .balance-amount {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 800;
-  margin: 0 0 16px;
+  margin: 0 0 22px;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
 }
 
 .balance-row {
   display: flex;
-  gap: 30px;
+  gap: 40px;
 }
 
 .balance-sub-label {
@@ -183,7 +183,7 @@ h3 {
 .donut-row {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
 }
 
 .legend {
@@ -193,7 +193,7 @@ h3 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .legend li {
@@ -204,8 +204,8 @@ h3 {
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -250,8 +250,8 @@ h3 {
 }
 
 .dot-large {
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
 }
 
@@ -285,10 +285,9 @@ h3 {
 .bottom-nav {
   display: flex;
   justify-content: space-around;
-  padding: 6px 0;
+  padding: 8px 0;
   border-top: 1px solid var(--border);
   background: var(--card-bg);
-  gap: 8px;
 }
 
 .nav-item {
@@ -299,7 +298,7 @@ h3 {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 6px;
+  padding: 8px;
   font-size: 11px;
   color: var(--text-muted);
   transition: color 0.2s;
@@ -310,7 +309,7 @@ h3 {
   color: var(--primary);
 }
 
-/* Forms and buttons */
+/* Forms */
 .fab {
   width: 40px;
   height: 40px;
