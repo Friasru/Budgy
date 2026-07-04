@@ -148,19 +148,19 @@ h3 {
 .balance-card {
   background: linear-gradient(135deg, #8b7cf0 0%, #6c5dd3 55%, #5a4bd0 100%);
   border-radius: var(--radius-lg);
-  padding: 16px;
+  padding: 14px;
   color: #fff;
   box-shadow: 0 12px 30px rgba(108, 93, 211, 0.35);
 }
 
 .balance-label {
-  font-size: 14px;
+  font-size: 12px;
   opacity: 0.85;
   margin: 0 0 6px;
 }
 
 .balance-amount {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 800;
   margin: 0 0 14px;
   font-variant-numeric: tabular-nums;
@@ -208,7 +208,7 @@ h3 {
 .donut-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 .legend {
