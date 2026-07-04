@@ -34,14 +34,14 @@ body {
   justify-content: center;
   height: 100vh;
   background: #d9dbe6;
-  padding: 5px 0;
+  padding: 15px 0;
   overflow: hidden;
 }
 
 .phone-frame {
   width: 100%;
   max-width: 460px;
-  height: 98%;
+  height: 100%;
   background: var(--bg);
   border-radius: 32px;
   overflow: hidden;
@@ -272,7 +272,7 @@ h3 {
 .transaction-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .transaction-row {
@@ -281,7 +281,7 @@ h3 {
   gap: 12px;
   background: var(--card-bg);
   border-radius: var(--radius-md);
-  padding: 14px 16px;
+  padding: 8px 16px;
   box-shadow: 0 2px 12px rgba(20, 20, 43, 0.04);
 }
 
@@ -313,7 +313,7 @@ h3 {
 .transaction-amount {
   font-family: 'SF Mono', 'Roboto Mono', monospace;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 12px;
   white-space: nowrap;
 }
 
