@@ -95,6 +95,26 @@ body {
   padding-bottom: 2px;
 }
 
+/* ── Finance: fixed top section + scrollable transactions ── */
+.finance-screen {
+  height: 100%;
+  overflow: hidden;
+}
+
+.finance-fixed {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 4px;
+}
+
+.finance-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 8px;
+}
+
 .eyebrow {
   color: var(--text-muted);
   font-size: 14px;

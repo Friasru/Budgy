@@ -31,62 +31,68 @@ export default function Finance() {
   }
 
   return (
-    <div className="screen">
-      <div className="screen-header-row">
-        <div>
-          <p className="eyebrow">Your finances</p>
-          <h1>Finance</h1>
-        </div>
-        <button className="fab" onClick={() => setShowForm(true)} aria-label="Add transaction">
-          <Plus size={22} />
-        </button>
-      </div>
-
-      <div className="summary-row">
-        <div className="summary-card summary-income">
-          <div className="summary-label">
-            <TrendingUp size={16} /> Income
+    <div className="screen finance-screen">
+      {/* ── Fixed top section ── */}
+      <div className="finance-fixed">
+        <div className="screen-header-row">
+          <div>
+            <p className="eyebrow">Your finances</p>
+            <h1>Finance</h1>
           </div>
-          <p className="summary-amount">${income.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
-        </div>
-        <div className="summary-card summary-expense">
-          <div className="summary-label">
-            <TrendingDown size={16} /> Expenses
-          </div>
-          <p className="summary-amount">${expenses.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
-        </div>
-      </div>
-
-      <div className="pill-tabs">
-        {FILTERS.map((f) => (
-          <button
-            key={f}
-            className={`pill-tab ${filter === f ? 'pill-tab-active' : ''}`}
-            onClick={() => setFilter(f)}
-          >
-            {f}
+          <button className="fab" onClick={() => setShowForm(true)} aria-label="Add transaction">
+            <Plus size={22} />
           </button>
-        ))}
+        </div>
+
+        <div className="summary-row">
+          <div className="summary-card summary-income">
+            <div className="summary-label">
+              <TrendingUp size={16} /> Income
+            </div>
+            <p className="summary-amount">${income.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+          </div>
+          <div className="summary-card summary-expense">
+            <div className="summary-label">
+              <TrendingDown size={16} /> Expenses
+            </div>
+            <p className="summary-amount">${expenses.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+          </div>
+        </div>
+
+        <div className="pill-tabs">
+          {FILTERS.map((f) => (
+            <button
+              key={f}
+              className={`pill-tab ${filter === f ? 'pill-tab-active' : ''}`}
+              onClick={() => setFilter(f)}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div className="transaction-list">
-        {filtered.map((t) => (
-          <div className="transaction-row transaction-row-card" key={t.id}>
-            <div className="transaction-icon" style={{ background: t.amount > 0 ? '#EDEBFB' : '#FCEAEA' }}>
-              <span className="dot-large" style={{ background: t.amount > 0 ? '#6C5DD3' : '#EF476F' }} />
-            </div>
-            <div className="transaction-info">
-              <p className="transaction-title">{t.title}</p>
-              <p className="muted small">
-                {t.category} · {t.date}
+      {/* ── Scrollable transactions section ── */}
+      <div className="finance-scroll">
+        <div className="transaction-list">
+          {filtered.map((t) => (
+            <div className="transaction-row transaction-row-card" key={t.id}>
+              <div className="transaction-icon" style={{ background: t.amount > 0 ? '#EDEBFB' : '#FCEAEA' }}>
+                <span className="dot-large" style={{ background: t.amount > 0 ? '#6C5DD3' : '#EF476F' }} />
+              </div>
+              <div className="transaction-info">
+                <p className="transaction-title">{t.title}</p>
+                <p className="muted small">
+                  {t.category} · {t.date}
+                </p>
+              </div>
+              <p className={`transaction-amount ${t.amount > 0 ? 'positive' : 'negative'}`}>
+                {t.amount > 0 ? '+' : '-'}${Math.abs(t.amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}
               </p>
             </div>
-            <p className={`transaction-amount ${t.amount > 0 ? 'positive' : 'negative'}`}>
-              {t.amount > 0 ? '+' : '-'}${Math.abs(t.amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}
-            </p>
-          </div>
-        ))}
-        {filtered.length === 0 && <p className="muted empty-state">No transactions yet.</p>}
+          ))}
+          {filtered.length === 0 && <p className="muted empty-state">No transactions yet.</p>}
+        </div>
       </div>
 
       {showForm && (
