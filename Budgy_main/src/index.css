@@ -20,10 +20,8 @@
 html,
 body,
 #root {
-  width: 100%;
   height: 100%;
   margin: 0;
-  padding: 0;
 }
 
 body {
@@ -34,17 +32,15 @@ body {
 .app-shell {
   display: flex;
   justify-content: center;
-  width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: #d9dbe6;
-  padding: 0;
-  margin: 0;
+  padding: 12px 0;
 }
 
 .phone-frame {
   width: 100%;
   max-width: 460px;
-  height: 100vh;
+  height: calc(100vh - 24px);
   background: var(--bg);
   border-radius: 32px;
   overflow: hidden;
@@ -65,28 +61,24 @@ body {
 .app-content {
   flex: 1;
   overflow: hidden;
-  padding: 10px 8px 0;
-  display: flex;
-  flex-direction: column;
+  padding: 16px 16px 8px;
 }
 
 .screen {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  height: 100%;
-  overflow: hidden;
+  gap: 12px;
 }
 
 .eyebrow {
   color: var(--text-muted);
-  font-size: 11px;
-  margin: 0 0 2px;
+  font-size: 14px;
+  margin: 0 0 4px;
 }
 
 h1 {
   color: var(--text-main);
-  font-size: 18px;
+  font-size: 28px;
   font-weight: 800;
   margin: 0;
   letter-spacing: -0.02em;
@@ -94,98 +86,90 @@ h1 {
 
 h3 {
   color: var(--text-main);
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 700;
   margin: 0;
-}
-
-.screen-header {
-  flex-shrink: 0;
 }
 
 .screen-header-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  flex-shrink: 0;
 }
 
 .card {
   background: var(--card-bg);
   border-radius: var(--radius-lg);
-  padding: 10px;
+  padding: 16px;
   box-shadow: 0 2px 12px rgba(20, 20, 43, 0.04);
-  flex-shrink: 0;
 }
 
 .card-header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .muted {
   color: var(--text-muted);
-  font-size: 11px;
 }
 
 .small {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 /* Balance card */
 .balance-card {
   background: linear-gradient(135deg, #8b7cf0 0%, #6c5dd3 55%, #5a4bd0 100%);
   border-radius: var(--radius-lg);
-  padding: 12px;
+  padding: 20px;
   color: #fff;
   box-shadow: 0 12px 30px rgba(108, 93, 211, 0.35);
-  flex-shrink: 0;
 }
 
 .balance-label {
-  font-size: 11px;
+  font-size: 14px;
   opacity: 0.85;
-  margin: 0 0 4px;
+  margin: 0 0 6px;
 }
 
 .balance-amount {
-  font-size: 20px;
+  font-size: 32px;
   font-weight: 800;
-  margin: 0 0 8px;
+  margin: 0 0 16px;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
 }
 
 .balance-row {
   display: flex;
-  gap: 20px;
+  gap: 30px;
 }
 
 .balance-sub-label {
   display: flex;
   align-items: center;
-  gap: 3px;
-  font-size: 10px;
+  gap: 4px;
+  font-size: 13px;
   opacity: 0.85;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 .balance-sub-amount {
   font-family: 'SF Mono', 'Roboto Mono', monospace;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 600;
   margin: 0;
 }
 
 /* Progress bar */
 .progress-track {
-  height: 5px;
+  height: 8px;
   background: var(--border);
   border-radius: 999px;
   overflow: hidden;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 .progress-fill {
@@ -199,7 +183,7 @@ h3 {
 .donut-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
 }
 
 .legend {
@@ -209,63 +193,56 @@ h3 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 8px;
 }
 
 .legend li {
   display: flex;
   align-items: center;
-  gap: 4px;
-  font-size: 10px;
+  gap: 6px;
+  font-size: 13px;
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
 }
 
 .legend-name {
-  font-size: 10px;
-  flex: 1;
+  font-size: 13px;
 }
 
 .legend-value {
-  font-size: 9px;
+  font-size: 12px;
   margin-left: auto;
 }
 
 .section-title {
-  font-size: 12px;
-  margin: 2px 0 4px;
+  font-size: 14px;
+  margin: 0;
   color: var(--text-main);
   font-weight: 700;
-  flex-shrink: 0;
 }
 
 .transaction-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  overflow: hidden;
-  flex: 1;
+  gap: 8px;
 }
 
 .transaction-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px;
-  background: var(--card-bg);
-  border-radius: 8px;
-  flex-shrink: 0;
+  gap: 12px;
+  padding: 10px;
 }
 
 .transaction-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -273,8 +250,8 @@ h3 {
 }
 
 .dot-large {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
 }
 
@@ -284,20 +261,16 @@ h3 {
 }
 
 .transaction-title {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   margin: 0;
   color: var(--text-main);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .transaction-amount {
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
-  flex-shrink: 0;
 }
 
 .transaction-amount.positive {
@@ -312,34 +285,35 @@ h3 {
 .bottom-nav {
   display: flex;
   justify-content: space-around;
-  padding: 8px 0;
+  padding: 6px 0;
   border-top: 1px solid var(--border);
   background: var(--card-bg);
-  flex-shrink: 0;
+  gap: 8px;
 }
 
 .nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 6px 8px;
-  font-size: 9px;
+  padding: 6px;
+  font-size: 11px;
   color: var(--text-muted);
   transition: color 0.2s;
+  flex: 1;
 }
 
 .nav-item-active {
   color: var(--primary);
 }
 
-/* Forms */
+/* Forms and buttons */
 .fab {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: var(--primary);
   border: none;
@@ -348,5 +322,4 @@ h3 {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  flex-shrink: 0;
 }
