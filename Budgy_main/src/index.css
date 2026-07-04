@@ -72,6 +72,29 @@ body {
   gap: 20px;
 }
 
+/* ── Dashboard: fixed top cards + scrollable transactions ── */
+.dashboard-screen {
+  height: 100%;
+  overflow: hidden;
+}
+
+.dashboard-fixed {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 4px;
+}
+
+.dashboard-scroll {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 8px;
+}
+
 .eyebrow {
   color: var(--text-muted);
   font-size: 14px;
