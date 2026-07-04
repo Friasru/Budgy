@@ -32,9 +32,9 @@ body {
 .app-shell {
   display: flex;
   justify-content: center;
-  height: 105vh;
+  height: 100vh;
   background: #d9dbe6;
-  padding: 4px 0;
+  padding: 5px 0;
   overflow: hidden;
 }
 
