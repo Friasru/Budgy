@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AppProvider, useApp } from './context/AppContext.jsx'
 import BottomNav from './components/BottomNav.jsx'
 import Dashboard from './components/Dashboard.jsx'
@@ -9,6 +9,10 @@ import Settings from './components/Settings.jsx'
 function Shell() {
   const [tab, setTab] = useState('dashboard')
   const { darkMode } = useApp()
+
+  useEffect(() => {
+    document.body.classList.toggle('dark', darkMode)
+  }, [darkMode])
 
   const screens = {
     dashboard: <Dashboard />,

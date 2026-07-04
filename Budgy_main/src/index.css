@@ -29,6 +29,10 @@ body {
   background: #d9dbe6;
 }
 
+body.dark {
+  background: #1a1a2e;
+}
+
 .app-shell {
   display: flex;
   justify-content: center;
