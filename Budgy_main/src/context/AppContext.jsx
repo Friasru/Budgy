@@ -45,27 +45,10 @@ function getCategoryColor(categoryName) {
   return color
 }
 
-const initialTransactions = [
-  { id: 't1', title: 'Weekly groceries', category: 'Groceries', amount: -156.4, date: 'Jun 28' },
-  { id: 't2', title: 'Monthly salary', category: 'Salary', amount: 3500, date: 'Jun 25' },
-  { id: 't3', title: 'Design project', category: 'Freelance', amount: 850, date: 'Jun 22' },
-  { id: 't4', title: 'Netflix subscription', category: 'Entertainment', amount: -15.99, date: 'Jun 15' },
-  { id: 't5', title: 'Monthly transit pass', category: 'Transport', amount: -48, date: 'Jun 5' },
-  { id: 't6', title: 'June rent payment', category: 'Rent', amount: -1200, date: 'Jun 1' },
-]
-
-const initialTasks = [
-  { id: 'd1', title: 'Morning workout', tag: 'Health', frequency: 'Daily', done: true },
-  { id: 'd2', title: 'Read 20 pages', tag: 'Learning', frequency: 'Daily', done: false },
-  { id: 'w1', title: 'Grocery shopping', tag: 'Home', frequency: 'Weekly', done: false },
-  { id: 'w2', title: 'Review budget', tag: 'Finance', frequency: 'Weekly', done: false },
-]
-
 const FREE_TASK_LIMIT = 4
 
 // Storage utility functions for persistent data
 const StorageManager = {
-  // Load data with fallback to defaults
   loadData: (key, defaultValue) => {
     try {
       const saved = localStorage.getItem(key)
@@ -78,7 +61,6 @@ const StorageManager = {
     return defaultValue
   },
 
-  // Save data with error handling
   saveData: (key, data) => {
     try {
       localStorage.setItem(key, JSON.stringify(data))
@@ -89,36 +71,25 @@ const StorageManager = {
     }
   },
 
-  // Check if this is first time user
-  isFirstTimeUser: () => {
-    return !localStorage.getItem('budgy_initialized')
+  isOnboardingComplete: () => {
+    return localStorage.getItem('budgy_onboardingComplete') === 'true'
   },
 
-  // Mark as initialized
-  markInitialized: () => {
-    localStorage.setItem('budgy_initialized', 'true')
+  markOnboardingComplete: () => {
+    localStorage.setItem('budgy_onboardingComplete', 'true')
     localStorage.setItem('budgy_storageVersion', STORAGE_VERSION.toString())
   },
 }
 
 export function AppProvider({ children }) {
-  // Initialize storage on first load
-  useEffect(() => {
-    if (StorageManager.isFirstTimeUser()) {
-      StorageManager.markInitialized()
-    }
-  }, [])
-
   const [transactions, setTransactions] = useState(() => {
     const saved = StorageManager.loadData('budgy_transactions', null)
-    // Only use defaults on first-time user
-    return saved !== null ? saved : initialTransactions
+    return saved !== null ? saved : []
   })
   
   const [tasks, setTasks] = useState(() => {
     const saved = StorageManager.loadData('budgy_tasks', null)
-    // Only use defaults on first-time user
-    return saved !== null ? saved : initialTasks
+    return saved !== null ? saved : []
   })
   
   const [darkMode, setDarkMode] = useState(() => {
@@ -134,6 +105,10 @@ export function AppProvider({ children }) {
   const [customCategories, setCustomCategories] = useState(() => {
     const saved = StorageManager.loadData('budgy_customCategories', null)
     return saved !== null ? saved : []
+  })
+
+  const [onboardingComplete, setOnboardingComplete] = useState(() => {
+    return StorageManager.isOnboardingComplete()
   })
 
   // Save transactions to localStorage whenever they change
@@ -212,6 +187,11 @@ export function AppProvider({ children }) {
 
   const getAllCategories = () => [...DEFAULT_CATEGORIES, ...customCategories]
 
+  const completeOnboarding = () => {
+    StorageManager.markOnboardingComplete()
+    setOnboardingComplete(true)
+  }
+
   const completedTasksCount = tasks.filter((t) => t.done).length
   const taskProgressPercent = tasks.length === 0 ? 0 : Math.round((completedTasksCount / tasks.length) * 100)
 
@@ -236,6 +216,8 @@ export function AppProvider({ children }) {
     customCategories,
     addCategory,
     getAllCategories,
+    onboardingComplete,
+    completeOnboarding,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
