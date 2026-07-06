@@ -25,17 +25,23 @@ function getCategoryColor(categoryName) {
     }
   }
   
-  // More distinct colors for custom categories
-  const customColors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2', '#F38181', '#AA96DA', '#FCBAD3', '#A8D8EA']
+  // Load stored category colors
+  const storedColors = JSON.parse(localStorage.getItem('budgy_categoryColors') || '{}')
   
-  // Better hash function to avoid collisions
-  let hash = 0
-  for (let i = 0; i < normalized.length; i++) {
-    hash = ((hash << 5) - hash) + normalized.charCodeAt(i)
-    hash = hash & hash // Convert to 32bit integer
+  if (storedColors[normalized]) {
+    return storedColors[normalized]
   }
   
-  return customColors[Math.abs(hash) % customColors.length]
+  // Generate new color
+  const customColors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2', '#F38181', '#AA96DA', '#FCBAD3', '#A8D8EA']
+  const usedColors = Object.values(storedColors)
+  const color = customColors.find(c => !usedColors.includes(c)) || customColors[usedColors.length % customColors.length]
+  
+  // Save the new color
+  storedColors[normalized] = color
+  localStorage.setItem('budgy_categoryColors', JSON.stringify(storedColors))
+  
+  return color
 }
 
 const initialTransactions = [
