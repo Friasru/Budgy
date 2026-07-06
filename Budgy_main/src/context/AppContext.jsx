@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useState } from 'react'
+import React, { createContext, useContext, useMemo, useState, useEffect } from 'react'
 
 const AppContext = createContext(null)
 
@@ -31,10 +31,45 @@ const initialTasks = [
 const FREE_TASK_LIMIT = 4
 
 export function AppProvider({ children }) {
-  const [transactions, setTransactions] = useState(initialTransactions)
-  const [tasks, setTasks] = useState(initialTasks)
-  const [darkMode, setDarkMode] = useState(false)
-  const [isPro, setIsPro] = useState(false)
+  const [transactions, setTransactions] = useState(() => {
+    const saved = localStorage.getItem('budgy_transactions')
+    return saved ? JSON.parse(saved) : initialTransactions
+  })
+  
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem('budgy_tasks')
+    return saved ? JSON.parse(saved) : initialTasks
+  })
+  
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('budgy_darkMode')
+    return saved ? JSON.parse(saved) : false
+  })
+  
+  const [isPro, setIsPro] = useState(() => {
+    const saved = localStorage.getItem('budgy_isPro')
+    return saved ? JSON.parse(saved) : false
+  })
+
+  // Save transactions to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('budgy_transactions', JSON.stringify(transactions))
+  }, [transactions])
+
+  // Save tasks to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('budgy_tasks', JSON.stringify(tasks))
+  }, [tasks])
+
+  // Save darkMode to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('budgy_darkMode', JSON.stringify(darkMode))
+  }, [darkMode])
+
+  // Save isPro to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('budgy_isPro', JSON.stringify(isPro))
+  }, [isPro])
 
   const income = useMemo(
     () => transactions.filter((t) => t.amount > 0).reduce((sum, t) => sum + t.amount, 0),
