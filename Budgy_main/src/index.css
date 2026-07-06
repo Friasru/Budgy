@@ -292,6 +292,7 @@ h3 {
   gap: 6px;
   font-size: 13px;
   white-space: nowrap;
+  color: var(--text-main);
 }
 
 .dot {
@@ -306,12 +307,14 @@ h3 {
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--text-main);
 }
 
 .legend-value {
   font-size: 12px;
   margin-left: auto;
   flex-shrink: 0;
+  color: var(--text-muted);
 }
 
 .dot-large {
