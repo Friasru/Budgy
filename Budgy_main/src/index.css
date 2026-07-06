@@ -266,31 +266,51 @@ h3 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
+  max-height: 110px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.legend::-webkit-scrollbar {
+  width: 4px;
+}
+
+.legend::-webkit-scrollbar-track {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+.legend::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 999px;
 }
 
 .legend li {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
-}
-
-.legend-name {
-  color: var(--text-main);
-  flex: 1;
-}
-
-.legend-value {
-  color: var(--text-muted);
-  font-family: 'SF Mono', 'Roboto Mono', monospace;
   font-size: 13px;
+  white-space: nowrap;
 }
 
 .dot {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-name {
+  font-size: 13px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.legend-value {
+  font-size: 12px;
+  margin-left: auto;
   flex-shrink: 0;
 }
 
