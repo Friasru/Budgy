@@ -44,6 +44,106 @@ export default function Finance() {
     setShowForm(false)
   }
 
+  // Show empty state if no transactions at all
+  if (transactions.length === 0) {
+    return (
+      <div className="screen finance-screen">
+        <div className="finance-fixed">
+          <div className="screen-header-row">
+            <div>
+              <p className="eyebrow">Your finances</p>
+              <h1>Finance</h1>
+            </div>
+            <button className="fab" onClick={() => setShowForm(true)} aria-label="Add transaction">
+              <Plus size={22} />
+            </button>
+          </div>
+
+          <div className="summary-row">
+            <div className="summary-card summary-income">
+              <div className="summary-label">
+                <TrendingUp size={16} /> Income
+              </div>
+              <p className="summary-amount">$0.00</p>
+            </div>
+            <div className="summary-card summary-expense">
+              <div className="summary-label">
+                <TrendingDown size={16} /> Expenses
+              </div>
+              <p className="summary-amount">$0.00</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="finance-scroll">
+          <div className="empty-state">
+            <div className="empty-state-icon">📭</div>
+            <h2 className="empty-state-title">No transactions yet</h2>
+            <p className="empty-state-description">Start tracking your finances by adding your first transaction.</p>
+            <button className="btn-primary" onClick={() => setShowForm(true)} style={{ marginTop: '16px' }}>
+              Add Transaction
+            </button>
+          </div>
+        </div>
+
+        {showForm && (
+          <div className="modal-overlay" onClick={() => setShowForm(false)}>
+            <div className="modal" onClick={(e) => e.stopPropagation()}>
+              <div className="modal-header">
+                <h3>Add Transaction</h3>
+                <button className="icon-button" onClick={() => setShowForm(false)}>
+                  <X size={20} />
+                </button>
+              </div>
+              <form onSubmit={handleSubmit} className="modal-form">
+                <div className="segmented">
+                  {['Expense', 'Income'].map((type) => (
+                    <button
+                      type="button"
+                      key={type}
+                      className={`segmented-item ${form.type === type ? 'segmented-item-active' : ''}`}
+                      onClick={() => setForm((f) => ({ ...f, type }))}
+                    >
+                      {type}
+                    </button>
+                  ))}
+                </div>
+                <input
+                  className="input"
+                  placeholder="Title (e.g. Coffee with friends)"
+                  value={form.title}
+                  onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
+                />
+                <select
+                  className="input"
+                  value={form.category}
+                  onChange={handleCategoryChange}
+                >
+                  <option value="">Select Category</option>
+                  {getAllCategories().map((cat) => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                  <option value="create">+ Create Category</option>
+                </select>
+                <input
+                  className="input"
+                  placeholder="Amount"
+                  type="number"
+                  step="0.01"
+                  value={form.amount}
+                  onChange={(e) => setForm((f) => ({ ...f, amount: e.target.value }))}
+                />
+                <button type="submit" className="primary-button">
+                  Add {form.type}
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
+      </div>
+    )
+  }
+
   return (
     <div className="screen finance-screen">
       {/* ── Fixed top section ── */}
@@ -105,7 +205,6 @@ export default function Finance() {
               </p>
             </div>
           ))}
-          {filtered.length === 0 && <p className="muted empty-state">No transactions yet.</p>}
         </div>
       </div>
 
