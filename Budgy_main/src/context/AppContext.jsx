@@ -110,23 +110,30 @@ export function AppProvider({ children }) {
   }, [])
 
   const [transactions, setTransactions] = useState(() => {
-    return StorageManager.loadData('budgy_transactions', initialTransactions)
+    const saved = StorageManager.loadData('budgy_transactions', null)
+    // Only use defaults on first-time user
+    return saved !== null ? saved : initialTransactions
   })
   
   const [tasks, setTasks] = useState(() => {
-    return StorageManager.loadData('budgy_tasks', initialTasks)
+    const saved = StorageManager.loadData('budgy_tasks', null)
+    // Only use defaults on first-time user
+    return saved !== null ? saved : initialTasks
   })
   
   const [darkMode, setDarkMode] = useState(() => {
-    return StorageManager.loadData('budgy_darkMode', false)
+    const saved = StorageManager.loadData('budgy_darkMode', null)
+    return saved !== null ? saved : false
   })
   
   const [isPro, setIsPro] = useState(() => {
-    return StorageManager.loadData('budgy_isPro', false)
+    const saved = StorageManager.loadData('budgy_isPro', null)
+    return saved !== null ? saved : false
   })
 
   const [customCategories, setCustomCategories] = useState(() => {
-    return StorageManager.loadData('budgy_customCategories', [])
+    const saved = StorageManager.loadData('budgy_customCategories', null)
+    return saved !== null ? saved : []
   })
 
   // Save transactions to localStorage whenever they change
