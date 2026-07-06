@@ -12,6 +12,8 @@ const CATEGORY_COLORS = {
   Other: '#9AA0B4',
 }
 
+const DEFAULT_CATEGORIES = ['Rent', 'Groceries', 'Entertainment', 'Transport', 'Salary', 'Freelance', 'Other Income', 'Other']
+
 // Generate consistent color for any category (case-insensitive)
 function getCategoryColor(categoryName) {
   const normalized = categoryName.toLowerCase()
@@ -71,6 +73,11 @@ export function AppProvider({ children }) {
     return saved ? JSON.parse(saved) : false
   })
 
+  const [customCategories, setCustomCategories] = useState(() => {
+    const saved = localStorage.getItem('budgy_customCategories')
+    return saved ? JSON.parse(saved) : []
+  })
+
   // Save transactions to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem('budgy_transactions', JSON.stringify(transactions))
@@ -90,6 +97,11 @@ export function AppProvider({ children }) {
   useEffect(() => {
     localStorage.setItem('budgy_isPro', JSON.stringify(isPro))
   }, [isPro])
+
+  // Save custom categories to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('budgy_customCategories', JSON.stringify(customCategories))
+  }, [customCategories])
 
   const income = useMemo(
     () => transactions.filter((t) => t.amount > 0).reduce((sum, t) => sum + t.amount, 0),
@@ -132,6 +144,16 @@ export function AppProvider({ children }) {
     setTasks([])
   }
 
+  const addCategory = (categoryName) => {
+    if (!customCategories.includes(categoryName) && !DEFAULT_CATEGORIES.includes(categoryName)) {
+      setCustomCategories((prev) => [...prev, categoryName])
+      return true
+    }
+    return false
+  }
+
+  const getAllCategories = () => [...DEFAULT_CATEGORIES, ...customCategories]
+
   const completedTasksCount = tasks.filter((t) => t.done).length
   const taskProgressPercent = tasks.length === 0 ? 0 : Math.round((completedTasksCount / tasks.length) * 100)
 
@@ -153,6 +175,9 @@ export function AppProvider({ children }) {
     isPro,
     setIsPro,
     FREE_TASK_LIMIT,
+    customCategories,
+    addCategory,
+    getAllCategories,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
