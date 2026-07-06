@@ -1,8 +1,11 @@
 {
   "name": "Budgy - Finance App",
   "short_name": "Budgy",
+  "description": "Track your spending and manage your finances with Budgy",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#ffffff",
   "theme_color": "#6c5dd3",
   "icons": [
@@ -15,6 +18,12 @@
     {
       "src": "/logo.png",
       "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "180x180",
       "type": "image/png",
       "purpose": "any"
     }
