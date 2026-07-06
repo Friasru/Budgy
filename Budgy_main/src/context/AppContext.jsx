@@ -12,6 +12,21 @@ const CATEGORY_COLORS = {
   Other: '#9AA0B4',
 }
 
+// Generate consistent color for any category
+function getCategoryColor(categoryName) {
+  if (CATEGORY_COLORS[categoryName]) {
+    return CATEGORY_COLORS[categoryName]
+  }
+  
+  // Generate color based on category name hash
+  const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2']
+  let hash = 0
+  for (let i = 0; i < categoryName.length; i++) {
+    hash = categoryName.charCodeAt(i) + ((hash << 5) - hash)
+  }
+  return colors[Math.abs(hash) % colors.length]
+}
+
 const initialTransactions = [
   { id: 't1', title: 'Weekly groceries', category: 'Groceries', amount: -156.4, date: 'Jun 28' },
   { id: 't2', title: 'Monthly salary', category: 'Salary', amount: 3500, date: 'Jun 25' },
@@ -89,7 +104,7 @@ export function AppProvider({ children }) {
         totals[t.category] = (totals[t.category] || 0) + Math.abs(t.amount)
       })
     return Object.entries(totals)
-      .map(([name, value]) => ({ name, value, color: CATEGORY_COLORS[name] || CATEGORY_COLORS.Other }))
+      .map(([name, value]) => ({ name, value, color: getCategoryColor(name) }))
       .sort((a, b) => b.value - a.value)
   }, [transactions])
 
