@@ -5,7 +5,7 @@ import { useApp } from '../context/AppContext.jsx'
 const FILTERS = ['All', 'Income', 'Expense']
 
 export default function Finance() {
-  const { transactions, income, expenses, addTransaction } = useApp()
+  const { transactions, income, expenses, addTransaction, getAllCategories, addCategory } = useApp()
   const [filter, setFilter] = useState('All')
   const [showForm, setShowForm] = useState(false)
   const [form, setForm] = useState({ title: '', category: '', amount: '', type: 'Expense' })
@@ -15,6 +15,20 @@ export default function Finance() {
     if (filter === 'Expense') return transactions.filter((t) => t.amount < 0)
     return transactions
   }, [transactions, filter])
+
+  const handleCategoryChange = (e) => {
+    const value = e.target.value
+    if (value === 'create') {
+      const newCat = prompt('Enter new category name:')
+      if (newCat && newCat.trim()) {
+        if (addCategory(newCat)) {
+          setForm((f) => ({ ...f, category: newCat }))
+        }
+      }
+    } else {
+      setForm((f) => ({ ...f, category: value }))
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -123,12 +137,17 @@ export default function Finance() {
                 value={form.title}
                 onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
               />
-              <input
+              <select
                 className="input"
-                placeholder="Category (e.g. Groceries)"
                 value={form.category}
-                onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))}
-              />
+                onChange={handleCategoryChange}
+              >
+                <option value="">Select Category</option>
+                {getAllCategories().map((cat) => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+                <option value="create">+ Create Category</option>
+              </select>
               <input
                 className="input"
                 placeholder="Amount"
