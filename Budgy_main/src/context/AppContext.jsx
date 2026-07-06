@@ -12,17 +12,22 @@ const CATEGORY_COLORS = {
   Other: '#9AA0B4',
 }
 
-// Generate consistent color for any category
+// Generate consistent color for any category (case-insensitive)
 function getCategoryColor(categoryName) {
-  if (CATEGORY_COLORS[categoryName]) {
-    return CATEGORY_COLORS[categoryName]
+  const normalized = categoryName.toLowerCase()
+  
+  // Check predefined colors (case-insensitive)
+  for (const [key, color] of Object.entries(CATEGORY_COLORS)) {
+    if (key.toLowerCase() === normalized) {
+      return color
+    }
   }
   
-  // Generate color based on category name hash
+  // Generate color based on normalized name
   const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2']
   let hash = 0
-  for (let i = 0; i < categoryName.length; i++) {
-    hash = categoryName.charCodeAt(i) + ((hash << 5) - hash)
+  for (let i = 0; i < normalized.length; i++) {
+    hash = normalized.charCodeAt(i) + ((hash << 5) - hash)
   }
   return colors[Math.abs(hash) % colors.length]
 }
