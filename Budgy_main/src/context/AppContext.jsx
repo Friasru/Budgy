@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useMemo, useState, useEffect } from 'react'
 
 const AppContext = createContext(null)
+const STORAGE_VERSION = 1
 
 const CATEGORY_COLORS = {
   Rent: '#EF476F',
@@ -62,55 +63,95 @@ const initialTasks = [
 
 const FREE_TASK_LIMIT = 4
 
+// Storage utility functions for persistent data
+const StorageManager = {
+  // Load data with fallback to defaults
+  loadData: (key, defaultValue) => {
+    try {
+      const saved = localStorage.getItem(key)
+      if (saved) {
+        return JSON.parse(saved)
+      }
+    } catch (error) {
+      console.error(`Error loading ${key}:`, error)
+    }
+    return defaultValue
+  },
+
+  // Save data with error handling
+  saveData: (key, data) => {
+    try {
+      localStorage.setItem(key, JSON.stringify(data))
+      return true
+    } catch (error) {
+      console.error(`Error saving ${key}:`, error)
+      return false
+    }
+  },
+
+  // Check if this is first time user
+  isFirstTimeUser: () => {
+    return !localStorage.getItem('budgy_initialized')
+  },
+
+  // Mark as initialized
+  markInitialized: () => {
+    localStorage.setItem('budgy_initialized', 'true')
+    localStorage.setItem('budgy_storageVersion', STORAGE_VERSION.toString())
+  },
+}
+
 export function AppProvider({ children }) {
+  // Initialize storage on first load
+  useEffect(() => {
+    if (StorageManager.isFirstTimeUser()) {
+      StorageManager.markInitialized()
+    }
+  }, [])
+
   const [transactions, setTransactions] = useState(() => {
-    const saved = localStorage.getItem('budgy_transactions')
-    return saved ? JSON.parse(saved) : initialTransactions
+    return StorageManager.loadData('budgy_transactions', initialTransactions)
   })
   
   const [tasks, setTasks] = useState(() => {
-    const saved = localStorage.getItem('budgy_tasks')
-    return saved ? JSON.parse(saved) : initialTasks
+    return StorageManager.loadData('budgy_tasks', initialTasks)
   })
   
   const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem('budgy_darkMode')
-    return saved ? JSON.parse(saved) : false
+    return StorageManager.loadData('budgy_darkMode', false)
   })
   
   const [isPro, setIsPro] = useState(() => {
-    const saved = localStorage.getItem('budgy_isPro')
-    return saved ? JSON.parse(saved) : false
+    return StorageManager.loadData('budgy_isPro', false)
   })
 
   const [customCategories, setCustomCategories] = useState(() => {
-    const saved = localStorage.getItem('budgy_customCategories')
-    return saved ? JSON.parse(saved) : []
+    return StorageManager.loadData('budgy_customCategories', [])
   })
 
   // Save transactions to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem('budgy_transactions', JSON.stringify(transactions))
+    StorageManager.saveData('budgy_transactions', transactions)
   }, [transactions])
 
   // Save tasks to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem('budgy_tasks', JSON.stringify(tasks))
+    StorageManager.saveData('budgy_tasks', tasks)
   }, [tasks])
 
   // Save darkMode to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem('budgy_darkMode', JSON.stringify(darkMode))
+    StorageManager.saveData('budgy_darkMode', darkMode)
   }, [darkMode])
 
   // Save isPro to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem('budgy_isPro', JSON.stringify(isPro))
+    StorageManager.saveData('budgy_isPro', isPro)
   }, [isPro])
 
   // Save custom categories to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem('budgy_customCategories', JSON.stringify(customCategories))
+    StorageManager.saveData('budgy_customCategories', customCategories)
   }, [customCategories])
 
   const income = useMemo(
