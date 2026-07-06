@@ -12,7 +12,7 @@ const CATEGORY_COLORS = {
   Other: '#9AA0B4',
 }
 
-const DEFAULT_CATEGORIES = ['Rent', 'Groceries', 'Entertainment', 'Transport', 'Salary', 'Freelance', 'Other Income', 'Other']
+const DEFAULT_CATEGORIES = ['Groceries', 'Entertainment', 'Transport', 'Salary']
 
 // Generate consistent color for any category (case-insensitive)
 function getCategoryColor(categoryName) {
@@ -25,13 +25,17 @@ function getCategoryColor(categoryName) {
     }
   }
   
-  // Generate color based on normalized name
-  const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2']
+  // More distinct colors for custom categories
+  const customColors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2', '#F38181', '#AA96DA', '#FCBAD3', '#A8D8EA']
+  
+  // Better hash function to avoid collisions
   let hash = 0
   for (let i = 0; i < normalized.length; i++) {
-    hash = normalized.charCodeAt(i) + ((hash << 5) - hash)
+    hash = ((hash << 5) - hash) + normalized.charCodeAt(i)
+    hash = hash & hash // Convert to 32bit integer
   }
-  return colors[Math.abs(hash) % colors.length]
+  
+  return customColors[Math.abs(hash) % customColors.length]
 }
 
 const initialTransactions = [
